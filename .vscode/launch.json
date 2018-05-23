@@ -1,0 +1,119 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "nodemon",
+            "type": "node",
+            "request": "attach",
+            "restart": true,
+            "port":9229,
+            "protocol": "auto"
+        },
+
+         {
+            "name": "Attach to Process",
+            "type": "node",
+            "request": "attach",
+            "port": 5858
+        },
+        {
+            "name": "nodemon",
+            "type": "node",
+            "request": "attach",
+            "restart": true,
+            "port":9229,
+            "protocol": "auto"
+        },
+        {
+            "name": "Launch Test NODE",
+            "type": "node",
+            "request": "attach",
+            "port": 9229,
+            "address": "localhost",
+            "inlineSourceMap": true,
+            "restart": true,
+            "protocol": "inspector",
+            "outFiles": [
+                "${workspaceRoot}/server/src/index.js"
+            ]
+        },
+        {
+            "name": "Launch Server with debug",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceRoot}/server/src",
+            "program": "${workspaceRoot}/server/src/index.js",
+            
+            "env": {
+                "NODE_ENV": "development"
+            }
+        },
+        {
+            "name": "Launch WEB NODE",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "program": "${workspaceRoot}/web/src/index.ts",
+            "outFiles": [
+                "${workspaceRoot}/web/dist/index.js"
+            ],
+            "sourceMaps": true
+        },
+        {
+            "name": "Launch API NODE",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceRoot}",
+            "program": "${workspaceRoot}/server/src/index.ts",
+            "outFiles": [
+                "${workspaceRoot}/server/dist/index.js"
+            ],
+            "sourceMaps": true
+        },
+        {
+            "name": "Launch Chrome with ng serve",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:4200/#",
+            "webRoot": "${workspaceRoot}"
+        },
+        {
+            "name": "Launch Chrome with ng test",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:9876/debug.html",
+            "webRoot": "${workspaceRoot}"
+        },
+        {
+            "name": "Launch ng e2e",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/node_modules/protractor/bin/protractor",
+            "protocol": "inspector",
+            "args": [
+                "${workspaceRoot}/protractor.conf.js"
+            ]
+        },
+        {
+            // Name of configuration; appears in the launch configuration drop down menu.
+            "name": "Run mocha",
+            // Type of configuration. Possible values: "node", "mono".
+            "type": "node2",
+            "request": "launch",
+            // Workspace relative or absolute path to the program.
+            "program": "${workspaceRoot}/server/node_modules/mocha/bin/_mocha",
+            // Automatically stop program after launch.
+            "stopOnEntry": false,
+            // Command line arguments passed to the program.
+            "args": ["--recursive", "--timeout", "15000"],
+            // Workspace relative or absolute path to the working directory of the program being debugged. Default is the current workspace.
+            "cwd": "${workspaceRoot}/server",
+            // Workspace relative or absolute path to the runtime executable to be used. Default is the runtime executable on the PATH.
+            "runtimeExecutable": null,
+            // Environment variables passed to the program.
+            "env": {
+                "NODE_ENV": "test",
+            }
+        }
+    ]
+}
