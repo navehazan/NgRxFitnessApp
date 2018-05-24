@@ -7,9 +7,13 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
+  maxDate;
+
   constructor() { }
 
   ngOnInit() {
+    this.maxDate = new Date();
+    this.maxDate.setFullYear(new Date().getFullYear() - 18);
     this.signupForm = new FormGroup({
       email: new FormControl(null),
       password: new FormControl(null)
@@ -17,5 +21,6 @@ export class SignupComponent implements OnInit {
   }
   onSignupSubmit() {
     console.log(this.signupForm.controls)
+    console.log(this.maxDate)
   }
 }
