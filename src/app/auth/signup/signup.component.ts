@@ -16,6 +16,6 @@ export class SignupComponent implements OnInit {
     })
   }
   onSignupSubmit() {
-    console.log(this.signupForm)
+    console.log(this.signupForm.controls)
   }
 }

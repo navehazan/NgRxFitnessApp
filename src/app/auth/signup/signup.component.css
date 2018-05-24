@@ -7,3 +7,9 @@
 mat-form-field {
   width: 300px;
 }
+
+.hint {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+}
