@@ -13,10 +13,11 @@
       <mat-error *ngIf="signupForm.controls.password.errors?.required && !signupForm.controls.password.valid">email is required</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Choose a date" [max]="maxDate">
+      <input matInput required formControlName="birthDay" [matDatepicker]="picker" placeholder="Choose a date" [max]="maxDate">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Submit</button>
+    <mat-checkbox required formControlName="agree" color="primary">Agree to terms and conditions!</mat-checkbox>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!signupForm.valid">Submit</button>
   </form>
 </section>

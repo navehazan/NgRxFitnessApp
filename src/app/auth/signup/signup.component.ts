@@ -16,11 +16,12 @@ export class SignupComponent implements OnInit {
     this.maxDate.setFullYear(new Date().getFullYear() - 18);
     this.signupForm = new FormGroup({
       email: new FormControl(null),
-      password: new FormControl(null)
+      password: new FormControl(null),
+      birthDay: new FormControl(null),
+      agree: new FormControl(null)
     })
   }
   onSignupSubmit() {
-    console.log(this.signupForm.controls)
-    console.log(this.maxDate)
+    console.log(this.signupForm)
   }
 }
