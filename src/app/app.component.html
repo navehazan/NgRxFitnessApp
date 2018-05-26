@@ -1,59 +1,9 @@
-<mat-sidenav-container class="example-container">
-  <mat-sidenav mode="side" #sidenav>
-    <mat-list>
-      <mat-list-item>
-        <a class="sidenav-list-item" routerLink="/signup" (click)="sidenav.toggle()">
-          <mat-icon>face</mat-icon>
-          <span>Signup</span>
-        </a>
-      </mat-list-item>
-      <mat-list-item>
-        <a class="sidenav-list-item" routerLink="/login" (click)="sidenav.toggle()">
-          <mat-icon>input</mat-icon>
-          <span>Login</span>
-        </a>
-      </mat-list-item>
-      <mat-list-item>
-        <a class="sidenav-list-item" routerLink="/training" (click)="sidenav.toggle()">
-          <mat-icon>fitness_center</mat-icon>
-          <span>Training</span>
-        </a>
-      </mat-list-item>
-      <mat-list-item>
-        <button mat-icon-button class="sidenav-list-item" (click)="sidenav.toggle()">
-          <mat-icon>eject</mat-icon>
-          Logout
-        </button>
-      </mat-list-item>
-    </mat-list>
+<mat-sidenav-container>
+  <mat-sidenav mode="side" [opened]="showSidenav">
+    <app-sidenav></app-sidenav>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <div class="toolbar-button small">
-        <button mat-icon-button class="toolbar-button-item" (click)="sidenav.toggle()">
-          <mat-icon>menu</mat-icon>
-        </button>
-      </div>
-      <div routerLink="/" class="toolbar-logo">
-        LOGO
-      </div>
-      <div class="toolbar-links big">
-        <ul class="toolbar-links-list">
-          <li class="toolbar-links-item">
-            <a class="toolbar-list-item" routerLink="/signup">Signup</a>
-          </li>
-          <li class="toolbar-links-item">
-            <a class="toolbar-list-item" routerLink="/login">Login</a>
-          </li>
-          <li class="toolbar-links-item">
-            <a class="toolbar-list-item" routerLink="/training">Training</a>
-          </li>
-          <li class="toolbar-links-item">
-            <a class="toolbar-list-item">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </mat-toolbar>
+    <app-header></app-header>
     <main>
       <router-outlet></router-outlet>
     </main>

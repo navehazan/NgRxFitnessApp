@@ -1,0 +1,29 @@
+.toolbar-links-list {
+  display: flex;
+}
+
+.toolbar-links {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.toolbar-list-item {
+  color: #fff;
+}
+
+.toolbar-links-item {
+  margin-left: 5px;
+}
+
+@media screen and (max-width: 600px) {
+  .big {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .small {
+    display: none;
+  }
+}

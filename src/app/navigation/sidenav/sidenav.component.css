@@ -1,0 +1,8 @@
+.sidenav-list-item {
+  padding: 5px;
+}
+
+mat-sidenav {
+  width: 200px;
+  height: 100%;
+}
