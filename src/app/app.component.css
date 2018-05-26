@@ -35,3 +35,7 @@ a:hover,
 a:active {
   color: lightgrey;
 }
+
+.toolbar-links-item {
+  margin-left: 10px;
+}
