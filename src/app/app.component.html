@@ -1,1 +1,9 @@
-<router-outlet></router-outlet>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="side" [opened]="showSidenav">
+    im the sidenav
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <button (click)="showSidenav=!showSidenav"></button>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
