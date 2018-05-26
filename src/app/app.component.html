@@ -1,9 +1,9 @@
 <mat-sidenav-container class="example-container">
-  <mat-sidenav mode="side" [opened]="showSidenav">
+  <mat-sidenav mode="side" #sidenav>
     im the sidenav
   </mat-sidenav>
   <mat-sidenav-content>
-    <button (click)="showSidenav=!showSidenav"></button>
+    <button (click)="sidenav.toggle()">toggle</button>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
