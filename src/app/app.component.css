@@ -37,5 +37,22 @@ a:active {
 }
 
 .toolbar-links-item {
-  margin-left: 10px;
+  margin-left: 5px;
+}
+
+.sidenav-list-item {
+  color: black;
+  padding: 5px;
+}
+
+@media screen and (max-width: 600px) {
+  .big {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .small {
+    display: none;
+  }
 }
