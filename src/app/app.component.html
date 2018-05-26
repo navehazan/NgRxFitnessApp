@@ -5,17 +5,27 @@
   <mat-sidenav-content>
     <mat-toolbar color="primary">
       <div class="toolbar-button">
-        <button class="toolbar-button-item" (click)="sidenav.toggle()">
-          toggle sidenav
+        <button mat-icon-button class="toolbar-button-item" (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
         </button>
       </div>
       <div routerLink="/" class="toolbar-logo">
         LOGO
       </div>
       <div class="toolbar-links">
-        <a routerLink="/signup">Signup</a>
-        <a routerLink="/login">Login</a>
-        <a routerLink="/training">Training</a>
+        <ul class="toolbar-links-list">
+          <li class="toolbar-links-item">
+            <a routerLink="/signup">Signup</a>
+          </li>
+          <li class="toolbar-links-item">
+            <a routerLink="/login">Login</a>
+          </li>
+          <li class="toolbar-links-item">
+            <a routerLink="/training">Training</a>
+          </li>
+        </ul>
+
+
       </div>
     </mat-toolbar>
     <main>
