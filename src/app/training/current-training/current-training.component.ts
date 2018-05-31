@@ -33,6 +33,7 @@ export class CurrentTrainingComponent implements OnInit {
         clearInterval(this.timer);
         this.infoService.goingTraining$$.next(false);
       } else {
+        this.startExercise()
         this.dialog.closeAll();
       }
     })
