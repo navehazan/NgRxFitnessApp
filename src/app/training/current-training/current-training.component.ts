@@ -30,11 +30,9 @@ export class CurrentTrainingComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(resultes => {
       if (resultes) {
-        clearInterval(this.timer);
         this.infoService.goingTraining$$.next(false);
       } else {
-        this.startExercise()
-        this.dialog.closeAll();
+        this.startExercise();
       }
     })
   }
