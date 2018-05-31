@@ -9,10 +9,13 @@ import { Router } from "@angular/router";
   styleUrls: ['./current-training.component.css']
 })
 export class CurrentTrainingComponent implements OnInit {
-  constructor(public dialog: MatDialog, public router: Router) { }
+  constructor(public dialog: MatDialog, public router: Router, private infoService: InfoService) { }
   progress = 0;
   timer;
   ngOnInit() {
+    this.startExercise();
+  }
+  startExercise() {
     this.timer = setInterval(() => {
       this.progress = this.progress + 20
       if (this.progress >= 100) {
@@ -21,14 +24,14 @@ export class CurrentTrainingComponent implements OnInit {
     }, 1000);
   }
   stopExercise() {
-
+    clearInterval(this.timer);
     const dialogRef = this.dialog.open(StopTrainingComponent, {
       data: { progress: this.progress },
     });
     dialogRef.afterClosed().subscribe(resultes => {
       if (resultes) {
         clearInterval(this.timer);
-        this.router.navigate(["/"])
+        this.infoService.goingTraining$$.next(false);
       } else {
         this.dialog.closeAll();
       }
