@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavComponent } from './navigation/sidenav/sidenav.component';
 import { InfoService } from './services/info-service';
+import { StopTrainingComponent } from './training/current-training/stop-training/stop-training.component';
 
 
 @NgModule({
@@ -28,7 +29,11 @@ import { InfoService } from './services/info-service';
     PastTrainingsComponent,
     WelcomeComponent,
     HeaderComponent,
-    SidenavComponent
+    SidenavComponent,
+    StopTrainingComponent
+  ],
+  entryComponents: [
+    StopTrainingComponent
   ],
   imports: [
     BrowserModule,
