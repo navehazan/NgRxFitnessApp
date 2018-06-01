@@ -9,17 +9,17 @@
   </div>
   <div class="toolbar-links big">
     <ul class="toolbar-links-list">
-      <li class="toolbar-links-item">
+      <li class="toolbar-links-item" *ngIf="!isLogin">
         <a class="toolbar-list-item" routerLink="/signup">Signup</a>
       </li>
-      <li class="toolbar-links-item">
+      <li class="toolbar-links-item" *ngIf="!isLogin">
         <a class="toolbar-list-item" routerLink="/login">Login</a>
       </li>
-      <li class="toolbar-links-item">
+      <li class="toolbar-links-item" *ngIf="isLogin">
         <a class="toolbar-list-item" routerLink="/training">Training</a>
       </li>
-      <li class="toolbar-links-item">
-        <a class="toolbar-list-item">Logout</a>
+      <li class="toolbar-links-item" *ngIf="isLogin">
+        <a class="toolbar-list-item" (click)="onLogout()">Logout</a>
       </li>
     </ul>
   </div>

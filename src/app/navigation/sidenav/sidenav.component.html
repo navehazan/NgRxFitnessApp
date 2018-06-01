@@ -1,24 +1,24 @@
 <mat-list>
-  <mat-list-item>
+  <mat-list-item *ngIf="!isLogin">
     <a class="sidenav-list-item " routerLink="/signup" (click)="toggleSidenav()">
       <mat-icon>face</mat-icon>
       <span>Signup</span>
     </a>
   </mat-list-item>
-  <mat-list-item>
+  <mat-list-item *ngIf="!isLogin">
     <a class="sidenav-list-item " routerLink="/login" (click)="toggleSidenav()">
       <mat-icon>input</mat-icon>
       <span>Login</span>
     </a>
   </mat-list-item>
-  <mat-list-item>
+  <mat-list-item *ngIf="isLogin">
     <a class="sidenav-list-item " routerLink="/training" (click)="toggleSidenav()">
       <mat-icon>fitness_center</mat-icon>
       <span>Training</span>
     </a>
   </mat-list-item>
-  <mat-list-item>
-    <button mat-icon-button class="sidenav-list-item " (click)="toggleSidenav()">
+  <mat-list-item *ngIf="isLogin">
+    <button mat-icon-button class="sidenav-list-item " (click)="toggleSidenav()" (click)="onLogout()">
       <mat-icon>eject</mat-icon>
       Logout
     </button>

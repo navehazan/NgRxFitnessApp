@@ -10,6 +10,7 @@
 
 .toolbar-list-item {
   color: #fff;
+  cursor: pointer;
 }
 
 .toolbar-links-item {
