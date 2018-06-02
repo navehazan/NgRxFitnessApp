@@ -24,6 +24,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
     this.infoService.sidenav$$.next("click");
   }
   onLogout() {
+    this.toggleSidenav();
     this.authService.logut();
   }
   ngOnDestroy() {
