@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { InfoService } from '../../services/info-service';
-import { AuthService } from '../../services/auth.service';
-import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { InfoService } from '../../../services/info-service';
+import { Subscription, Subject } from 'rxjs';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  selector: 'app-sidenav',
+  templateUrl: './sidenav.component.html',
+  styleUrls: ['./sidenav.component.css']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class SidenavComponent implements OnInit, OnDestroy {
 
   constructor(private infoService: InfoService, private authService: AuthService) { }
   isLogin = false;
@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.infoService.sidenav$$.next("click");
   }
   onLogout() {
+    this.toggleSidenav();
     this.authService.logut();
   }
   ngOnDestroy() {

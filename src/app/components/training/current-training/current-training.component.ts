@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { InfoService } from '../../services/info-service';
+import { InfoService } from '../../../services/info-service';
 import { MatDialog } from '@angular/material';
 import { StopTrainingComponent } from '../current-training/stop-training/stop-training.component';
 import { Router } from "@angular/router";

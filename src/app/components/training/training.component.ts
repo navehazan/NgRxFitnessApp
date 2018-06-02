@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, Subject } from "rxjs";
-import { InfoService } from '../services/info-service';
+import { InfoService } from '../../services/info-service';
 import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-training',
