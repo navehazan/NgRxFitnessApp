@@ -19,10 +19,9 @@ export class CurrentTrainingComponent implements OnInit, OnDestroy {
   timer;
   currentExercise: Exercise;
   ngOnInit() {
-    const currentExersuce = this.trainingService.currentTrainingChange$$.pipe(takeUntil(this.ngUnsubscribe));
-    currentExersuce.subscribe((exrsice: Exercise) => {
+    const currentExersice = this.trainingService.currentTrainingChange$$.pipe(takeUntil(this.ngUnsubscribe));
+    currentExersice.subscribe((exrsice: Exercise) => {
       this.currentExercise = exrsice;
-      console.log(this.currentExercise);
     })
     this.startExercise();
   }

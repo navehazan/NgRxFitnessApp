@@ -1,5 +1,5 @@
 import { Exercise } from "../models/exercise.model";
-import { Subject } from "rxjs";
+import { Subject, ReplaySubject } from "rxjs";
 
 export class TrainingService {
     private currentExercise: Exercise;
@@ -9,7 +9,7 @@ export class TrainingService {
         { id: 'side-lunges', name: 'Side Lunges', duration: 120, calories: 18 },
         { id: 'burpees', name: 'Burpees', duration: 60, calories: 8 }
     ];
-    currentTrainingChange$$ = new Subject<Exercise>();
+    currentTrainingChange$$ = new ReplaySubject<Exercise>(1);
     getAviableExercise() {
         return [...this.availableExercise];
     }
