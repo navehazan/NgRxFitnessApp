@@ -22,7 +22,6 @@ export class NewTrainingComponent implements OnInit {
   }
   onGoingTraining() {
     this.trainingService.startExercise(this.newTrainingForm.value.exercise);
-    this.trainingService.goingTraining$$.next(true);
   }
 
 }

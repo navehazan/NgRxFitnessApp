@@ -13,14 +13,13 @@ export class TrainingComponent implements OnInit, OnDestroy {
   constructor(private trainingService: TrainingService) { }
   goingTraining = false;
   ngOnInit() {
-    const goingTraining = this.trainingService.goingTraining$$.pipe(takeUntil(this.ngUnsubscribe));
+    const goingTraining = this.trainingService.currentTrainingChange$$.pipe(takeUntil(this.ngUnsubscribe));
     goingTraining.subscribe((goingTraining) => {
-      this.goingTraining = goingTraining;
+      goingTraining != null ? this.goingTraining = true : this.goingTraining = false;
     })
   }
   ngOnDestroy() {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
-
   }
 }

@@ -1,22 +1,29 @@
 import { Exercise } from './../../../models/exercise.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { InfoService } from '../../../services/info-service';
 import { MatDialog } from '@angular/material';
 import { StopTrainingComponent } from '../current-training/stop-training/stop-training.component';
 import { Router } from "@angular/router";
 import { TrainingService } from '../../../services/training.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-current-training',
   templateUrl: './current-training.component.html',
   styleUrls: ['./current-training.component.css']
 })
-export class CurrentTrainingComponent implements OnInit {
+export class CurrentTrainingComponent implements OnInit, OnDestroy {
   constructor(public dialog: MatDialog, public router: Router, private trainingService: TrainingService) { }
+  ngUnsubscribe = new Subject();
   progress = 0;
   timer;
   currentExercise: Exercise;
   ngOnInit() {
-    this.currentExercise = this.trainingService.getCurrentExercise();
+    const currentExersuce = this.trainingService.currentTrainingChange$$.pipe(takeUntil(this.ngUnsubscribe));
+    currentExersuce.subscribe((exrsice: Exercise) => {
+      this.currentExercise = exrsice;
+      console.log(this.currentExercise);
+    })
     this.startExercise();
   }
   startExercise() {
@@ -34,10 +41,14 @@ export class CurrentTrainingComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(resultes => {
       if (resultes) {
-        this.trainingService.goingTraining$$.next(false);
+        this.trainingService.currentTrainingChange$$.next(null);
       } else {
         this.startExercise();
       }
     })
+  }
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

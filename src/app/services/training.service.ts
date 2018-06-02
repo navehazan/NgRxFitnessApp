@@ -9,14 +9,13 @@ export class TrainingService {
         { id: 'side-lunges', name: 'Side Lunges', duration: 120, calories: 18 },
         { id: 'burpees', name: 'Burpees', duration: 60, calories: 8 }
     ];
-    goingTraining$$ = new Subject<boolean>();
+    currentTrainingChange$$ = new Subject<Exercise>();
     getAviableExercise() {
         return [...this.availableExercise];
     }
     startExercise(id: string) {
         this.currentExercise = this.availableExercise.find(exercise => exercise.id === id);
+        this.currentTrainingChange$$.next({ ...this.currentExercise });
     }
-    getCurrentExercise() {
-        return { ...this.currentExercise }
-    }
+
 }
