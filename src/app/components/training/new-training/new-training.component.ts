@@ -1,5 +1,7 @@
+import { Exercise } from './../../../models/exercise.model';
 import { Component, OnInit } from '@angular/core';
 import { InfoService } from '../../../services/info-service';
+import { TrainingService } from '../../../services/training.service';
 
 @Component({
   selector: 'app-new-training',
@@ -7,13 +9,15 @@ import { InfoService } from '../../../services/info-service';
   styleUrls: ['./new-training.component.css']
 })
 export class NewTrainingComponent implements OnInit {
+  availableExercise: Exercise[];
+  constructor(private infoService: InfoService, private trainingService: TrainingService) { }
 
-  constructor(private infoService: InfoService) { }
 
+  ngOnInit() {
+    this.availableExercise = this.trainingService.availableExercise;
+  }
   onGoingTraining() {
     this.infoService.goingTraining$$.next(true);
-  }
-  ngOnInit() {
   }
 
 }
