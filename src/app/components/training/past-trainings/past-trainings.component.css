@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table {
+  width: 100%;
+}
+
+mat-paginator {
+  align-self: flex-end;
+}
