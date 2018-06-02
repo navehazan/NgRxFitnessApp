@@ -11,7 +11,7 @@ import { MatTableDataSource } from '@angular/material';
 export class PastTrainingsComponent implements OnInit {
   constructor(private trainingService: TrainingService) { }
   dataSource = new MatTableDataSource<Exercise>();
-  displayedColumns = ["date", "name", "duration", "state"];
+  displayedColumns = ["date", "name", "calories", "duration", "state"];
 
   ngOnInit() {
     this.dataSource.data = this.trainingService.getPastExercise();
