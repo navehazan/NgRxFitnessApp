@@ -16,4 +16,7 @@ export class TrainingService {
     startExercise(id: string) {
         this.currentExercise = this.availableExercise.find(exercise => exercise.id === id);
     }
+    getCurrentExercise() {
+        return { ...this.currentExercise }
+    }
 }

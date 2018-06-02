@@ -1,3 +1,4 @@
+import { Exercise } from './../../../models/exercise.model';
 import { Component, OnInit } from '@angular/core';
 import { InfoService } from '../../../services/info-service';
 import { MatDialog } from '@angular/material';
@@ -13,7 +14,9 @@ export class CurrentTrainingComponent implements OnInit {
   constructor(public dialog: MatDialog, public router: Router, private trainingService: TrainingService) { }
   progress = 0;
   timer;
+  currentExercise: Exercise;
   ngOnInit() {
+    this.currentExercise = this.trainingService.getCurrentExercise();
     this.startExercise();
   }
   startExercise() {
