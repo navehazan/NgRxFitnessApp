@@ -1,4 +1,4 @@
-import { Exercise } from "../models/exercise.model";
+import { Exercise } from './../models/exercise.model';
 import { Subject, ReplaySubject } from "rxjs";
 
 export class TrainingService {
@@ -9,6 +9,7 @@ export class TrainingService {
         { id: 'side-lunges', name: 'Side Lunges', duration: 120, calories: 18 },
         { id: 'burpees', name: 'Burpees', duration: 60, calories: 8 }
     ];
+    pastExersice: Exercise[] = [];
     currentTrainingChange$$ = new ReplaySubject<Exercise>(1);
     getAviableExercise() {
         return [...this.availableExercise];
@@ -16,6 +17,22 @@ export class TrainingService {
     startExercise(id: string) {
         this.currentExercise = this.availableExercise.find(exercise => exercise.id === id);
         this.currentTrainingChange$$.next({ ...this.currentExercise });
+    }
+    completeExercise() {
+        this.pastExersice.push({ ...this.currentExercise, date: new Date(), state: "completed" })
+        this.currentExercise = null;
+        this.currentTrainingChange$$.next(null);
+    }
+    cancelExercise(progress: number) {
+        this.pastExersice.push({
+            ...this.currentExercise,
+            date: new Date(),
+            state: "cancelled",
+            duration: this.currentExercise.duration * (progress / 100),
+            calories: this.currentExercise.calories * (progress / 100)
+        })
+        this.currentExercise = null;
+        this.currentTrainingChange$$.next(null);
     }
 
 }
