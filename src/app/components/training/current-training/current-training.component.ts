@@ -26,12 +26,13 @@ export class CurrentTrainingComponent implements OnInit, OnDestroy {
     this.startExercise();
   }
   startExercise() {
+    const step = this.currentExercise.duration / 100 * 1000;
     this.timer = setInterval(() => {
-      this.progress = this.progress + 20
+      this.progress = this.progress + 1
       if (this.progress >= 100) {
         clearInterval(this.timer);
       }
-    }, 1000);
+    }, step);
   }
   stopExercise() {
     clearInterval(this.timer);
