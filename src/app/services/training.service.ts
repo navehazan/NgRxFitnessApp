@@ -9,7 +9,7 @@ export class TrainingService {
         { id: 'side-lunges', name: 'Side Lunges', duration: 120, calories: 18 },
         { id: 'burpees', name: 'Burpees', duration: 60, calories: 8 }
     ];
-    pastExersice: Exercise[] = [];
+    private pastExersice: Exercise[] = [];
     currentTrainingChange$$ = new ReplaySubject<Exercise>(1);
     getAviableExercise() {
         return [...this.availableExercise];
@@ -33,6 +33,9 @@ export class TrainingService {
         })
         this.currentExercise = null;
         this.currentTrainingChange$$.next(null);
+    }
+    getPastExercise() {
+        return [...this.pastExersice];
     }
 
 }
