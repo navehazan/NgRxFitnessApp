@@ -10,14 +10,14 @@ import { TrainingService } from '../../../services/training.service';
 })
 export class NewTrainingComponent implements OnInit {
   availableExercise: Exercise[];
-  constructor(private infoService: InfoService, private trainingService: TrainingService) { }
+  constructor(private trainingService: TrainingService) { }
 
 
   ngOnInit() {
     this.availableExercise = this.trainingService.getAviableExercise();
   }
   onGoingTraining() {
-    this.infoService.goingTraining$$.next(true);
+    this.trainingService.goingTraining$$.next(true);
   }
 
 }

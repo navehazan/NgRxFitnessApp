@@ -1,4 +1,5 @@
 import { Exercise } from "../models/exercise.model";
+import { Subject } from "rxjs";
 
 export class TrainingService {
     private availableExercise: Exercise[] = [
@@ -7,6 +8,7 @@ export class TrainingService {
         { id: 'side-lunges', name: 'Side Lunges', duration: 120, calories: 18 },
         { id: 'burpees', name: 'Burpees', duration: 60, calories: 8 }
     ];
+    goingTraining$$ = new Subject<boolean>();
     getAviableExercise() {
         return [...this.availableExercise];
     }
