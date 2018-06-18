@@ -18,8 +18,9 @@ import { InfoService } from './services/info-service';
 import { StopTrainingComponent } from './components/training/current-training/stop-training/stop-training.component';
 import { AuthService } from './services/auth.service';
 import { TrainingService } from './services/training.service';
-
-
+import { AngularFireModule } from "angularfire2";
+import { environment } from "../environments/environment";
+import { AngularFirestoreModule } from "angularfire2/firestore";
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,9 @@ import { TrainingService } from './services/training.service';
     MaterialModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [InfoService, AuthService, TrainingService],
   bootstrap: [AppComponent]
