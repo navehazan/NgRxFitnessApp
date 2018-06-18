@@ -20,7 +20,8 @@ import { AuthService } from './services/auth.service';
 import { TrainingService } from './services/training.service';
 import { AngularFireModule } from "angularfire2";
 import { environment } from "../environments/environment";
-import { AngularFirestoreModule } from "angularfire2/firestore";
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
 @NgModule({
   declarations: [
     AppComponent,
