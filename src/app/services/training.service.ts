@@ -9,6 +9,7 @@ export class TrainingService {
     private availableExercise: Exercise[] = [];
     private pastExersice: Exercise[] = [];
     currentTrainingChange$$ = new ReplaySubject<Exercise>(1);
+    exercisesChanged$ = new Subject<Exercise[]>();
     constructor(private db: AngularFirestore) { }
     getAviableExercise() {
         return this.db.collection("aviableExersice").snapshotChanges().map((results) => {
@@ -18,6 +19,9 @@ export class TrainingService {
                     ...item.payload.doc.data()
                 }
             })
+        }).subscribe((exersices: Exercise[]) => {
+            this.availableExercise = exersices;
+            this.exercisesChanged$.next(this.availableExercise)
         })
     }
     startExercise(id: string) {
