@@ -14,7 +14,7 @@ export class TrainingService {
     ngUnsubscribe$ = new Subject();
     constructor(private db: AngularFirestore) { }
     getAviableExercise() {
-        return this.db.collection("aviableExersice").snapshotChanges().pipe(takeUntil(this.ngUnsubscribe$), map((results) => {
+        this.db.collection("aviableExersice").snapshotChanges().pipe(takeUntil(this.ngUnsubscribe$), map((results) => {
             return results.map((item) => {
                 return {
                     id: item.payload.doc.id,
