@@ -13,7 +13,6 @@ export class AuthService {
     registerUser(authData: AuthData) {
         this.afAuth.auth.createUserWithEmailAndPassword(authData.email, authData.password).then((res) => {
             console.log(res)
-            this.authSuccessfully();
         }).catch((err) => {
             console.log(err)
         })
@@ -22,26 +21,30 @@ export class AuthService {
     login(authData: AuthData) {
         this.afAuth.auth.signInWithEmailAndPassword(authData.email, authData.password).then((res) => {
             console.log(res)
-            this.authSuccessfully();
         }).catch((err) => {
             console.log(err)
         })
 
     }
+    initAuthListener() {
+        this.afAuth.authState.subscribe((user) => {
+            if (user) {
+                this.isAuthenticated = true;
+                this.isLogin.next(true);
+                this.router.navigate(["/training"]);
+            } else {
+                this.TrainingService.cancelSubscription();
+                this.isLogin.next(false);
+                this.router.navigate(["/login"])
+                this.isAuthenticated = false;
+            }
+        })
+    }
     logut() {
-        this.TrainingService.cancelSubscription();
         this.afAuth.auth.signOut();
-        this.isLogin.next(false);
-        this.router.navigate(["/login"])
-        this.isAuthenticated = false;
     }
 
 
-    authSuccessfully() {
-        this.isAuthenticated = true;
-        this.isLogin.next(true);
-        this.router.navigate(["/training"]);
-    }
     isAuth() {
         return this.isAuthenticated;
     }
