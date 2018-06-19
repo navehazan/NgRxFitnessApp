@@ -11,10 +11,9 @@ export class TrainingService {
     currentTrainingChange$$ = new ReplaySubject<Exercise>(1);
     exercisesChanged$ = new Subject<Exercise[]>();
     pastExercisesChanged$ = new Subject<Exercise[]>();
-    ngUnsubscribe$ = new Subject();
     constructor(private db: AngularFirestore) { }
     getAviableExercise() {
-        this.db.collection("aviableExersice").snapshotChanges().pipe(takeUntil(this.ngUnsubscribe$), map((results) => {
+        this.db.collection("aviableExersice").snapshotChanges().pipe(map((results) => {
             return results.map((item) => {
                 return {
                     id: item.payload.doc.id,
@@ -24,6 +23,8 @@ export class TrainingService {
         })).subscribe((exersices: Exercise[]) => {
             this.availableExercise = exersices;
             this.exercisesChanged$.next([...this.availableExercise])
+        }, (err) => {
+
         })
     }
     startExercise(id: string) {
@@ -47,16 +48,14 @@ export class TrainingService {
         this.currentTrainingChange$$.next(null);
     }
     getPastExercise() {
-        this.db.collection("finishExersices").valueChanges().pipe(takeUntil(this.ngUnsubscribe$)).subscribe((res: Exercise[]) => {
+        this.db.collection("finishExersices").valueChanges().subscribe((res: Exercise[]) => {
             this.pastExercisesChanged$.next([...res])
+        }, (err) => {
+
         })
     }
     private saveDataToDb(exercise: Exercise) {
         this.db.collection("finishExersices").add(exercise);
     }
-    cancelSubscription() {
-        this.ngUnsubscribe$.next();
-        this.ngUnsubscribe$.complete();
 
-    }
 }

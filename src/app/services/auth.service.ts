@@ -33,7 +33,6 @@ export class AuthService {
                 this.isLogin.next(true);
                 this.router.navigate(["/training"]);
             } else {
-                this.TrainingService.cancelSubscription();
                 this.isLogin.next(false);
                 this.router.navigate(["/login"])
                 this.isAuthenticated = false;
