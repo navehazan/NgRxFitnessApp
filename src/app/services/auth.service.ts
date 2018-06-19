@@ -3,9 +3,10 @@ import { Subject } from "rxjs";
 import { User } from "../models/user.model";
 import { AuthData } from "../models/auth-data.model";
 import { Injectable } from "@angular/core";
+import { AngularFireAuth } from "angularfire2/auth";
 @Injectable()
 export class AuthService {
-    constructor(private router: Router) { }
+    constructor(private router: Router, private auth: AngularFireAuth) { }
     private user: User;
     isLogin = new Subject<boolean>();
     registerUser(authData: AuthData) {
