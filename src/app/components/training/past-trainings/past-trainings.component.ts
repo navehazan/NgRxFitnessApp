@@ -1,8 +1,8 @@
+import { takeUntil } from 'rxjs/operators';
 import { Exercise } from './../../../models/exercise.model';
 import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { TrainingService } from '../../../services/training.service';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
-import 'rxjs/add/operator/takeUntil';
 import { Subject } from "rxjs";
 @Component({
   selector: 'app-past-trainings',
@@ -18,7 +18,7 @@ export class PastTrainingsComponent implements OnInit, AfterViewInit, OnDestroy 
   ngUnsubscribe$ = new Subject();
   ngOnInit() {
     this.trainingService.getPastExercise();
-    this.trainingService.pastExercisesChanged$.subscribe((exersice: Exercise[]) => {
+    this.trainingService.pastExercisesChanged$.pipe(takeUntil(this.ngUnsubscribe$)).subscribe((exersice: Exercise[]) => {
       this.dataSource.data = exersice;
     })
 

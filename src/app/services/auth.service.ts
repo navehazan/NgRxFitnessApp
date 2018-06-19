@@ -4,9 +4,10 @@ import { User } from "../models/user.model";
 import { AuthData } from "../models/auth-data.model";
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "angularfire2/auth";
+import { TrainingService } from './training.service';
 @Injectable()
 export class AuthService {
-    constructor(private router: Router, private afAuth: AngularFireAuth) { }
+    constructor(private router: Router, private afAuth: AngularFireAuth, private TrainingService: TrainingService) { }
     isAuthenticated = false;
     isLogin = new Subject<boolean>();
     registerUser(authData: AuthData) {
@@ -28,10 +29,11 @@ export class AuthService {
 
     }
     logut() {
+        this.TrainingService.cancelSubscription();
         this.afAuth.auth.signOut();
-        this.isAuthenticated = false;
         this.isLogin.next(false);
         this.router.navigate(["/login"])
+        this.isAuthenticated = false;
     }
 
 
