@@ -21,7 +21,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
     })
   }
   toggleSidenav() {
-    this.uiService.sidenav$$.next("click");
+    this.uiService.sidenav$.next("click");
   }
   onLogout() {
     this.toggleSidenav();

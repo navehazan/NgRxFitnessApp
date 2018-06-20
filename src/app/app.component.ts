@@ -13,7 +13,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngUnsubscribe = new Subject();
   constructor(private uiService: UiService, private authService: AuthService) { }
   ngOnInit() {
-    const sidenav = this.uiService.sidenav$$.pipe(takeUntil(this.ngUnsubscribe))
+    const sidenav = this.uiService.sidenav$.pipe(takeUntil(this.ngUnsubscribe))
     sidenav.subscribe((showNav: string) => {
       this.showSidenav = !this.showSidenav;
     });

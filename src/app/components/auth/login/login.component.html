@@ -12,7 +12,7 @@
       <mat-error *ngIf="!loginForm.controls.password.errors?.required && !loginForm.controls.password.valid">email is invalid</mat-error>
       <mat-error *ngIf="loginForm.controls.password.errors?.required && !loginForm.controls.password.valid">email is required</mat-error>
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Submit</button>
-    <mat-spinner></mat-spinner>
+    <button *ngIf="!isLoading" mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Submit</button>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
   </form>
 </section>
