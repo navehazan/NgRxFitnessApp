@@ -13,7 +13,6 @@ export class AuthService {
         private router: Router,
         private afAuth: AngularFireAuth,
         private TrainingService: TrainingService,
-        private snackBar: MatSnackBar,
         private uiService: UiService) { }
     isAuthenticated = false;
     isLogin = new Subject<boolean>();
@@ -23,7 +22,8 @@ export class AuthService {
             this.uiService.loadingStateChanged$.next(false);
         }).catch((err) => {
             this.uiService.loadingStateChanged$.next(false);
-            this.snackBar.open(err.message, null, { duration: 3000 })
+            this.uiService.showSnackbar(err.message, null, { duration: 3000 })
+
         })
 
     }
@@ -33,7 +33,7 @@ export class AuthService {
             this.uiService.loadingStateChanged$.next(false);
         }).catch((err) => {
             this.uiService.loadingStateChanged$.next(false);
-            this.snackBar.open(err.message, null, { duration: 3000 })
+            this.uiService.showSnackbar(err.message, null, { duration: 3000 })
         })
 
     }
