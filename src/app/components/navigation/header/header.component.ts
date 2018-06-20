@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { InfoService } from '../../../services/info-service';
+import { UiService } from '../../../services/ui.service';
 import { AuthService } from '../../../services/auth.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  constructor(private infoService: InfoService, private authService: AuthService) { }
+  constructor(private uiService: UiService, private authService: AuthService) { }
   isLogin = false;
   ngUnsubscribe = new Subject();
   ngOnInit() {
@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     })
   }
   toggleSidenav() {
-    this.infoService.sidenav$$.next("click");
+    this.uiService.sidenav$$.next("click");
   }
   onLogout() {
     this.authService.logut();

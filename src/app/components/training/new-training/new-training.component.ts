@@ -1,6 +1,6 @@
+import { UiService } from './../../../services/ui.service';
 import { Exercise } from './../../../models/exercise.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { InfoService } from '../../../services/info-service';
 import { TrainingService } from '../../../services/training.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/takeUntil';

@@ -1,6 +1,6 @@
+import { UiService } from './../../../services/ui.service';
 import { takeUntil } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { InfoService } from '../../../services/info-service';
 import { Subscription, Subject } from 'rxjs';
 import { AuthService } from '../../../services/auth.service';
 
@@ -11,7 +11,7 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class SidenavComponent implements OnInit, OnDestroy {
 
-  constructor(private infoService: InfoService, private authService: AuthService) { }
+  constructor(private uiService: UiService, private authService: AuthService) { }
   isLogin = false;
   ngUnsubscribe = new Subject();
   ngOnInit() {
@@ -21,7 +21,7 @@ export class SidenavComponent implements OnInit, OnDestroy {
     })
   }
   toggleSidenav() {
-    this.infoService.sidenav$$.next("click");
+    this.uiService.sidenav$$.next("click");
   }
   onLogout() {
     this.toggleSidenav();

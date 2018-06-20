@@ -1,6 +1,6 @@
+import { UiService } from './../../../services/ui.service';
 import { Exercise } from './../../../models/exercise.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { InfoService } from '../../../services/info-service';
 import { MatDialog } from '@angular/material';
 import { StopTrainingComponent } from '../current-training/stop-training/stop-training.component';
 import { Router } from "@angular/router";

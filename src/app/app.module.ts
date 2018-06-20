@@ -14,7 +14,6 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './components/navigation/header/header.component';
 import { SidenavComponent } from './components/navigation/sidenav/sidenav.component';
-import { InfoService } from './services/info-service';
 import { StopTrainingComponent } from './components/training/current-training/stop-training/stop-training.component';
 import { AuthService } from './services/auth.service';
 import { TrainingService } from './services/training.service';
@@ -22,6 +21,7 @@ import { AngularFireModule } from "angularfire2";
 import { environment } from "../environments/environment";
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { UiService } from './services/ui.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +50,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     AngularFirestoreModule,
     AngularFireAuthModule
   ],
-  providers: [InfoService, AuthService, TrainingService],
+  providers: [AuthService, TrainingService, UiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

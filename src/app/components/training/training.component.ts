@@ -1,6 +1,6 @@
+import { UiService } from './../../services/ui.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, Subject } from "rxjs";
-import { InfoService } from '../../services/info-service';
 import { takeUntil } from 'rxjs/operators';
 import { TrainingService } from '../../services/training.service';
 @Component({
