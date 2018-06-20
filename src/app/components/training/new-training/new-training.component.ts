@@ -1,3 +1,4 @@
+import { takeUntil } from 'rxjs/operators';
 import { UiService } from './../../../services/ui.service';
 import { Exercise } from './../../../models/exercise.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -14,10 +15,14 @@ export class NewTrainingComponent implements OnInit, OnDestroy {
   newTrainingForm: FormGroup;
   availableExercise: Exercise[];
   ngUnsubscribe$ = new Subject();
-  constructor(private trainingService: TrainingService) { }
+  isLoading = false;
+  constructor(private trainingService: TrainingService, private uiService: UiService) { }
 
 
   ngOnInit() {
+    this.uiService.loadingStateChanged$.pipe(takeUntil(this.ngUnsubscribe$)).subscribe((isLoading: boolean) => {
+      this.isLoading = isLoading
+    })
     this.newTrainingForm = new FormGroup({
       exercise: new FormControl(null)
     })

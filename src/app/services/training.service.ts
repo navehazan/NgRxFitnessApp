@@ -3,6 +3,7 @@ import { Subject, ReplaySubject, Subscription } from "rxjs";
 import { AngularFirestore } from "angularfire2/firestore";
 import { takeUntil, map } from "rxjs/operators";
 import { Injectable } from '@angular/core';
+import { UiService } from './ui.service';
 @Injectable()
 export class TrainingService {
     private currentExercise: Exercise;
@@ -11,8 +12,9 @@ export class TrainingService {
     currentTrainingChange$$ = new ReplaySubject<Exercise>(1);
     exercisesChanged$ = new Subject<Exercise[]>();
     pastExercisesChanged$ = new Subject<Exercise[]>();
-    constructor(private db: AngularFirestore) { }
+    constructor(private db: AngularFirestore, private uiService: UiService) { }
     getAviableExercise() {
+        this.uiService.loadingStateChanged$.next(true);
         this.db.collection("aviableExersice").snapshotChanges().pipe(map((results) => {
             return results.map((item) => {
                 return {
@@ -23,8 +25,9 @@ export class TrainingService {
         })).subscribe((exersices: Exercise[]) => {
             this.availableExercise = exersices;
             this.exercisesChanged$.next([...this.availableExercise])
+            this.uiService.loadingStateChanged$.next(false);
         }, (err) => {
-
+            this.uiService.loadingStateChanged$.next(false);
         })
     }
     startExercise(id: string) {
