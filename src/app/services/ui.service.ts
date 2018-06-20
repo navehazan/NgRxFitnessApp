@@ -7,6 +7,6 @@ export class UiService {
     loadingStateChanged$ = new Subject<boolean>();
     sidenav$ = new Subject<string>();
     showSnackbar(messege, action, duration) {
-        this.snackBar.open(messege, action, duration)
+        this.snackBar.open(messege, action, { duration })
     }
 }

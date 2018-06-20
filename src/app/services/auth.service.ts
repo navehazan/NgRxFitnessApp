@@ -5,7 +5,6 @@ import { AuthData } from "../models/auth-data.model";
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "angularfire2/auth";
 import { TrainingService } from './training.service';
-import { MatSnackBar } from '@angular/material';
 import { UiService } from './ui.service';
 @Injectable()
 export class AuthService {
@@ -22,7 +21,7 @@ export class AuthService {
             this.uiService.loadingStateChanged$.next(false);
         }).catch((err) => {
             this.uiService.loadingStateChanged$.next(false);
-            this.uiService.showSnackbar(err.message, null, { duration: 3000 })
+            this.uiService.showSnackbar(err.message, null, 3000)
 
         })
 
@@ -33,7 +32,7 @@ export class AuthService {
             this.uiService.loadingStateChanged$.next(false);
         }).catch((err) => {
             this.uiService.loadingStateChanged$.next(false);
-            this.uiService.showSnackbar(err.message, null, { duration: 3000 })
+            this.uiService.showSnackbar(err.message, null, 3000)
         })
 
     }
