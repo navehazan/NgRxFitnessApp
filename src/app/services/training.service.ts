@@ -30,7 +30,6 @@ export class TrainingService {
             this.uiService.loadingStateChanged$.next(false);
         }, (err) => {
             this.uiService.loadingStateChanged$.next(false);
-            this.uiService.showSnackbar("fetching exersice failed", null, 3000);
             this.exercisesChanged$.next(null)
         })
     }
@@ -57,7 +56,7 @@ export class TrainingService {
     getPastExercise() {
         this.ngUnsubscribe2$ = this.db.collection("finishExersices").valueChanges().subscribe((res: Exercise[]) => {
             this.pastExercisesChanged$.next([...res])
-        })
+        }, (err) => { })
     }
     private saveDataToDb(exercise: Exercise) {
         this.db.collection("finishExersices").add(exercise);
