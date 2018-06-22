@@ -50,7 +50,6 @@ export class AuthService {
         })
     }
     logut() {
-        this.TrainingService.cancelSubscribtion();
         this.afAuth.auth.signOut();
     }
 
