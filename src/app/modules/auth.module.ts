@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from './material.module';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { SharedModule } from './shared.module';
+import { AuthRoutingModule } from './auth-routing.module';
 @NgModule({
     declarations: [
         SignupComponent,
@@ -14,7 +15,8 @@ import { SharedModule } from './shared.module';
     imports: [
         CommonModule,
         SharedModule,
-        AngularFireAuthModule
+        AngularFireAuthModule,
+        AuthRoutingModule
     ],
     exports: []
 })

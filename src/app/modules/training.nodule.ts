@@ -9,6 +9,7 @@ import { PastTrainingsComponent } from '../components/training/past-trainings/pa
 import { StopTrainingComponent } from '../components/training/current-training/stop-training/stop-training.component';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { SharedModule } from './shared.module';
+import { TrainingRoutingModule } from './training-routing.module';
 @NgModule({
     declarations: [
         TrainingComponent,
@@ -22,7 +23,8 @@ import { SharedModule } from './shared.module';
     ],
     imports: [
         SharedModule,
-        AngularFirestoreModule
+        AngularFirestoreModule,
+        TrainingRoutingModule
     ],
     exports: []
 })
