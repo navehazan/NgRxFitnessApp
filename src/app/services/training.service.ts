@@ -12,10 +12,12 @@ export class TrainingService {
     currentTrainingChange$$ = new ReplaySubject<Exercise>(1);
     exercisesChanged$ = new Subject<Exercise[]>();
     pastExercisesChanged$ = new Subject<Exercise[]>();
+    ngUnsubscribe1$: Subscription;
+    ngUnsubscribe2$: Subscription;
     constructor(private db: AngularFirestore, private uiService: UiService) { }
     getAviableExercise() {
         this.uiService.loadingStateChanged$.next(true);
-        this.db.collection("aviableExersice").snapshotChanges().pipe(map((results) => {
+        this.ngUnsubscribe1$ = this.db.collection("aviableExersice").snapshotChanges().pipe(map((results) => {
             return results.map((item) => {
                 return {
                     id: item.payload.doc.id,
@@ -28,6 +30,7 @@ export class TrainingService {
             this.uiService.loadingStateChanged$.next(false);
         }, (err) => {
             this.uiService.loadingStateChanged$.next(false);
+            this.uiService.showSnackbar("fetching exersice failed", null, 3000);
         })
     }
     startExercise(id: string) {
@@ -51,14 +54,16 @@ export class TrainingService {
         this.currentTrainingChange$$.next(null);
     }
     getPastExercise() {
-        this.db.collection("finishExersices").valueChanges().subscribe((res: Exercise[]) => {
+        this.ngUnsubscribe2$ = this.db.collection("finishExersices").valueChanges().subscribe((res: Exercise[]) => {
             this.pastExercisesChanged$.next([...res])
-        }, (err) => {
-
         })
     }
     private saveDataToDb(exercise: Exercise) {
         this.db.collection("finishExersices").add(exercise);
+    }
+    cancelSubscribtion() {
+        this.ngUnsubscribe1$.unsubscribe();
+        this.ngUnsubscribe2$.unsubscribe();
     }
 
 }
