@@ -12,8 +12,6 @@ import { AuthService } from './services/auth.service';
 import { TrainingService } from './services/training.service';
 import { AngularFireModule } from "angularfire2";
 import { environment } from "../environments/environment";
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireAuthModule } from 'angularfire2/auth';
 import { UiService } from './services/ui.service';
 import { AuthModule } from "./modules/auth.module";
 import { TrainingModule } from "./modules/training.nodule";
@@ -32,8 +30,6 @@ import { TrainingModule } from "./modules/training.nodule";
     ReactiveFormsModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    AngularFireAuthModule,
     AuthModule,
     TrainingModule
   ],

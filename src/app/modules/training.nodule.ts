@@ -7,6 +7,7 @@ import { CurrentTrainingComponent } from '../components/training/current-trainin
 import { NewTrainingComponent } from '../components/training/new-training/new-training.component';
 import { PastTrainingsComponent } from '../components/training/past-trainings/past-trainings.component';
 import { StopTrainingComponent } from '../components/training/current-training/stop-training/stop-training.component';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 @NgModule({
     declarations: [
         TrainingComponent,
@@ -22,7 +23,8 @@ import { StopTrainingComponent } from '../components/training/current-training/s
         CommonModule,
         ReactiveFormsModule,
         FormsModule,
-        MaterialModule
+        MaterialModule,
+        AngularFirestoreModule
     ],
     exports: []
 })
