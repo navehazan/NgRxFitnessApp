@@ -26,7 +26,7 @@ export class NewTrainingComponent implements OnInit, OnDestroy {
     this.newTrainingForm = new FormGroup({
       exercise: new FormControl(null)
     })
-    this.trainingService.getAviableExercise();
+    this.fetchExersices();
     this.trainingService.exercisesChanged$.takeUntil(this.ngUnsubscribe$).subscribe((exercises: Exercise[]) => {
       this.availableExercise = exercises;
     })
@@ -38,5 +38,7 @@ export class NewTrainingComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe$.next();
     this.ngUnsubscribe$.complete();
   }
-
+  fetchExersices() {
+    this.trainingService.getAviableExercise();
+  }
 }

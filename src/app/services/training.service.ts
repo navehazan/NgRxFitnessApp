@@ -31,6 +31,7 @@ export class TrainingService {
         }, (err) => {
             this.uiService.loadingStateChanged$.next(false);
             this.uiService.showSnackbar("fetching exersice failed", null, 3000);
+            this.exercisesChanged$.next(null)
         })
     }
     startExercise(id: string) {
