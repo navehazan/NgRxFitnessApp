@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from './material.module';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { SharedModule } from './shared.module';
 @NgModule({
     declarations: [
         SignupComponent,
@@ -12,9 +13,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     ],
     imports: [
         CommonModule,
-        ReactiveFormsModule,
-        FormsModule,
-        MaterialModule,
+        SharedModule,
         AngularFireAuthModule
     ],
     exports: []

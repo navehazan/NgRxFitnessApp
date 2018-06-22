@@ -1,9 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { MaterialModule } from './modules/material.module';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AppRoutingModule } from './modules/app-routing.module';
 import { HeaderComponent } from './components/navigation/header/header.component';
@@ -15,6 +13,7 @@ import { environment } from "../environments/environment";
 import { UiService } from './services/ui.service';
 import { AuthModule } from "./modules/auth.module";
 import { TrainingModule } from "./modules/training.nodule";
+import { SharedModule } from './modules/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,10 +24,8 @@ import { TrainingModule } from "./modules/training.nodule";
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule,
+    SharedModule,
     AppRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AuthModule,
     TrainingModule
