@@ -8,7 +8,6 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AppRoutingModule } from './modules/app-routing.module';
 import { HeaderComponent } from './components/navigation/header/header.component';
 import { SidenavComponent } from './components/navigation/sidenav/sidenav.component';
-import { StopTrainingComponent } from './components/training/current-training/stop-training/stop-training.component';
 import { AuthService } from './services/auth.service';
 import { TrainingService } from './services/training.service';
 import { AngularFireModule } from "angularfire2";
@@ -24,10 +23,6 @@ import { TrainingModule } from "./modules/training.nodule";
     WelcomeComponent,
     HeaderComponent,
     SidenavComponent,
-    StopTrainingComponent
-  ],
-  entryComponents: [
-    StopTrainingComponent
   ],
   imports: [
     BrowserModule,
