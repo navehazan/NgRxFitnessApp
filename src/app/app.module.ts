@@ -12,8 +12,8 @@ import { AngularFireModule } from "angularfire2";
 import { environment } from "../environments/environment";
 import { UiService } from './services/ui.service';
 import { AuthModule } from "./modules/auth.module";
-import { TrainingModule } from "./modules/training.nodule";
 import { SharedModule } from './modules/shared.module';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +28,7 @@ import { SharedModule } from './modules/shared.module';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AuthModule,
-    TrainingModule
+    AngularFirestoreModule
   ],
   providers: [AuthService, TrainingService, UiService],
   bootstrap: [AppComponent]
