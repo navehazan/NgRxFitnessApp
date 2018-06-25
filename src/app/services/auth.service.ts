@@ -18,11 +18,9 @@ export class AuthService {
         private uiService: UiService,
         private store: Store<fromApp.State>) { }
     isAuthenticated = false;
-    isLogin = new Subject<boolean>();
     registerUser(authData: AuthData) {
         this.uiService.loadingStateChanged$.next(true);
         this.afAuth.auth.createUserWithEmailAndPassword(authData.email, authData.password).then((res) => {
-            this.store.dispatch(new AUTH.Login())
             this.uiService.loadingStateChanged$.next(false);
         }).catch((err) => {
             this.uiService.loadingStateChanged$.next(false);
@@ -34,7 +32,6 @@ export class AuthService {
     login(authData: AuthData) {
         this.uiService.loadingStateChanged$.next(true);
         this.afAuth.auth.signInWithEmailAndPassword(authData.email, authData.password).then((res) => {
-            this.store.dispatch(new AUTH.Login())
             this.uiService.loadingStateChanged$.next(false);
         }).catch((err) => {
             this.uiService.loadingStateChanged$.next(false);
@@ -46,12 +43,10 @@ export class AuthService {
         this.afAuth.authState.subscribe((user) => {
             if (user) {
                 this.isAuthenticated = true;
-                this.isLogin.next(true);
                 this.store.dispatch(new AUTH.Login())
                 this.router.navigate(["/training"]);
             } else {
                 this.store.dispatch(new AUTH.Logout())
-                this.isLogin.next(false);
                 this.router.navigate(["/login"])
                 this.isAuthenticated = false;
             }
