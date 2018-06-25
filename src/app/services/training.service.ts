@@ -17,7 +17,6 @@ export class TrainingService {
     pastExercisesChanged$ = new Subject<Exercise[]>();
     constructor(private db: AngularFirestore, private uiService: UiService, private store: Store<fromApp.State>) { }
     getAviableExercise() {
-        this.uiService.loadingStateChanged$.next(true);
         this.store.dispatch(new UI.Start())
         this.db.collection("aviableExersice").snapshotChanges().pipe(map((results) => {
             return results.map((item) => {
@@ -29,10 +28,8 @@ export class TrainingService {
         })).subscribe((exersices: Exercise[]) => {
             this.availableExercise = exersices;
             this.exercisesChanged$.next([...this.availableExercise])
-            this.uiService.loadingStateChanged$.next(false);
             this.store.dispatch(new UI.End())
         }, (err) => {
-            this.uiService.loadingStateChanged$.next(false);
             this.exercisesChanged$.next(null)
             this.store.dispatch(new UI.End())
         })

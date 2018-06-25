@@ -21,13 +21,10 @@ export class AuthService {
     isAuthenticated = false;
     registerUser(authData: AuthData) {
         this.store.dispatch(new UI.Start())
-        this.uiService.loadingStateChanged$.next(true);
         this.afAuth.auth.createUserWithEmailAndPassword(authData.email, authData.password).then((res) => {
-            this.uiService.loadingStateChanged$.next(false);
             this.store.dispatch(new UI.End())
         }).catch((err) => {
             this.store.dispatch(new UI.End())
-            this.uiService.loadingStateChanged$.next(false);
             this.uiService.showSnackbar(err.message, null, 3000)
 
         })
@@ -35,12 +32,9 @@ export class AuthService {
     }
     login(authData: AuthData) {
         this.store.dispatch(new UI.Start())
-        this.uiService.loadingStateChanged$.next(true);
         this.afAuth.auth.signInWithEmailAndPassword(authData.email, authData.password).then((res) => {
-            this.uiService.loadingStateChanged$.next(false);
             this.store.dispatch(new UI.End())
         }).catch((err) => {
-            this.uiService.loadingStateChanged$.next(false);
             this.store.dispatch(new UI.End())
             this.uiService.showSnackbar(err.message, null, 3000)
         })
