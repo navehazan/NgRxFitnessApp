@@ -6,6 +6,8 @@ import { TrainingService } from '../../../services/training.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import 'rxjs/add/operator/takeUntil';
 import { Subject } from "rxjs";
+import { Store } from '@ngrx/store';
+import * as fromApp from "../../../app.reducer";
 @Component({
   selector: 'app-new-training',
   templateUrl: './new-training.component.html',
@@ -16,12 +18,12 @@ export class NewTrainingComponent implements OnInit, OnDestroy {
   availableExercise: Exercise[];
   ngUnsubscribe$ = new Subject();
   isLoading = false;
-  constructor(private trainingService: TrainingService, private uiService: UiService) { }
+  constructor(private trainingService: TrainingService, private uiService: UiService, private store: Store<fromApp.State>) { }
 
 
   ngOnInit() {
-    this.uiService.loadingStateChanged$.pipe(takeUntil(this.ngUnsubscribe$)).subscribe((isLoading: boolean) => {
-      this.isLoading = isLoading
+    this.store.select("ui").subscribe((state) => {
+      this.isLoading = state && state.isLoading;
     })
     this.newTrainingForm = new FormGroup({
       exercise: new FormControl(null)

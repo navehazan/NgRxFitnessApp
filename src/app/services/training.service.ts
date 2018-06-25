@@ -4,6 +4,9 @@ import { AngularFirestore } from "angularfire2/firestore";
 import { takeUntil, map } from "rxjs/operators";
 import { Injectable } from '@angular/core';
 import { UiService } from './ui.service';
+import { Store } from '@ngrx/store';
+import * as UI from "../actions/ui.action";
+import * as fromApp from "../app.reducer";
 @Injectable()
 export class TrainingService {
     private currentExercise: Exercise;
@@ -12,9 +15,10 @@ export class TrainingService {
     currentTrainingChange$$ = new ReplaySubject<Exercise>(1);
     exercisesChanged$ = new Subject<Exercise[]>();
     pastExercisesChanged$ = new Subject<Exercise[]>();
-    constructor(private db: AngularFirestore, private uiService: UiService) { }
+    constructor(private db: AngularFirestore, private uiService: UiService, private store: Store<fromApp.State>) { }
     getAviableExercise() {
         this.uiService.loadingStateChanged$.next(true);
+        this.store.dispatch(new UI.Start())
         this.db.collection("aviableExersice").snapshotChanges().pipe(map((results) => {
             return results.map((item) => {
                 return {
@@ -26,9 +30,11 @@ export class TrainingService {
             this.availableExercise = exersices;
             this.exercisesChanged$.next([...this.availableExercise])
             this.uiService.loadingStateChanged$.next(false);
+            this.store.dispatch(new UI.End())
         }, (err) => {
             this.uiService.loadingStateChanged$.next(false);
             this.exercisesChanged$.next(null)
+            this.store.dispatch(new UI.End())
         })
     }
     startExercise(id: string) {

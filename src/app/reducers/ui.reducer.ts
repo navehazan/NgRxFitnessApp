@@ -12,6 +12,8 @@ export const uiReducer = (state: State = defaultState, action: UI.uiActions) => 
             return { isLoading: true }
         case UI.END:
             return { isLoading: false }
+        default:
+            return state;
 
     }
 }

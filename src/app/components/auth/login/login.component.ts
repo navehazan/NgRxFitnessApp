@@ -1,24 +1,24 @@
-import { Subject } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { UiService } from '../../../services/ui.service';
-import { takeUntil } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import * as fromApp from "../../../app.reducer";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
   loginForm;
   isLoading = false;
-  ngUnsubscribe$ = new Subject();
-  constructor(private authService: AuthService, private uiService: UiService) { }
+  constructor(private authService: AuthService, private uiService: UiService, private store: Store<fromApp.State>) { }
 
   ngOnInit() {
-    this.uiService.loadingStateChanged$.pipe(takeUntil(this.ngUnsubscribe$)).subscribe((isLoading: boolean) => {
-      this.isLoading = isLoading;
+    this.store.select("ui").subscribe((state) => {
+      this.isLoading = state && state.isLoading;
     })
+
     this.loginForm = new FormGroup({
       email: new FormControl(null),
       password: new FormControl(null)
@@ -27,8 +27,5 @@ export class LoginComponent implements OnInit, OnDestroy {
   onLoginSubmit() {
     this.authService.login(this.loginForm.value);
   }
-  ngOnDestroy() {
-    this.ngUnsubscribe$.next();
-    this.ngUnsubscribe$.complete();
-  }
+
 }
