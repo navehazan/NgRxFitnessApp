@@ -1,25 +1,24 @@
 import { UiService } from './../../services/ui.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription, Subject } from "rxjs";
-import { takeUntil } from 'rxjs/operators';
 import { TrainingService } from '../../services/training.service';
+import { Store } from '@ngrx/store';
+import * as fromApp from "../../app.reducer";
+
 @Component({
   selector: 'app-training',
   templateUrl: './training.component.html',
   styleUrls: ['./training.component.css']
 })
-export class TrainingComponent implements OnInit, OnDestroy {
-  ngUnsubscribe = new Subject();
-  constructor(private trainingService: TrainingService) { }
+export class TrainingComponent implements OnInit {
+  constructor(private trainingService: TrainingService, private store: Store<fromApp.State>) { }
   goingTraining = false;
   ngOnInit() {
-    const goingTraining = this.trainingService.currentTrainingChange$$.pipe(takeUntil(this.ngUnsubscribe));
-    goingTraining.subscribe((goingTraining) => {
-      goingTraining != null ? this.goingTraining = true : this.goingTraining = false;
+    this.store.select("training").subscribe((state) => {
+      if (state.currentExersice) {
+        this.goingTraining = true;
+      } else {
+        this.goingTraining = false;
+      }
     })
-  }
-  ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
   }
 }
