@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { UiService } from './ui.service';
 import { Store } from '@ngrx/store';
 import * as UI from "../actions/ui.action";
+import * as TRAINING from "../actions/training.action";
 import * as fromApp from "../app.reducer";
 @Injectable()
 export class TrainingService {
@@ -27,7 +28,8 @@ export class TrainingService {
             })
         })).subscribe((exersices: Exercise[]) => {
             this.availableExercise = exersices;
-            this.exercisesChanged$.next([...this.availableExercise])
+            this.exercisesChanged$.next([...this.availableExercise]);
+            this.store.dispatch(new TRAINING.SetAviableExersices([...this.availableExercise]))
             this.store.dispatch(new UI.End())
         }, (err) => {
             this.exercisesChanged$.next(null)
@@ -57,6 +59,7 @@ export class TrainingService {
     getPastExercise() {
         this.db.collection("finishExersices").valueChanges().subscribe((res: Exercise[]) => {
             this.pastExercisesChanged$.next([...res])
+            this.store.dispatch(new TRAINING.SetPastExersices([...res]))
         }, (err) => { })
     }
     private saveDataToDb(exercise: Exercise) {

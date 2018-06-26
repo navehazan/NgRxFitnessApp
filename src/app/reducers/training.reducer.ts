@@ -15,6 +15,7 @@ export const trainingReducer = (state: State = defaultState, action: TRAINING.tr
             return { ...state, availableExercise: action.payload }
         case TRAINING.SET_PAST_EXERSICES:
             return { ...state, pastExercices: action.payload }
-
+        default:
+            return state;
     }
 }
