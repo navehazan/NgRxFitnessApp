@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   isLogin = false;
   ngOnInit() {
     this.store.select("auth").subscribe((state) => {
+      console.log(state)
       this.isLogin = state && state.isAuth
     })
 
