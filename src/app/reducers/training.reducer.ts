@@ -18,7 +18,9 @@ export const trainingReducer = (state: State = defaultState, action: TRAINING.tr
         case TRAINING.SET_PAST_EXERSICES:
             return { ...state, pastExercices: action.payload }
         case TRAINING.SET_CURRENT_EXERSICES:
-            return { ...state, currentExersice: action.payload }
+            return { ...state, currentExersice: state.availableExercise.find(item => item.id === action.payload) }
+        case TRAINING.STOP_CURRENT_EXERSICES:
+            return { ...state, currentExersice: null }
         default:
             return state;
     }

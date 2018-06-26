@@ -5,23 +5,24 @@ import { MatDialog } from '@angular/material';
 import { StopTrainingComponent } from '../current-training/stop-training/stop-training.component';
 import { Router } from "@angular/router";
 import { TrainingService } from '../../../services/training.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import * as fromApp from "../../../app.reducer";
 @Component({
   selector: 'app-current-training',
   templateUrl: './current-training.component.html',
   styleUrls: ['./current-training.component.css']
 })
-export class CurrentTrainingComponent implements OnInit, OnDestroy {
-  constructor(public dialog: MatDialog, public router: Router, private trainingService: TrainingService) { }
-  ngUnsubscribe = new Subject();
+export class CurrentTrainingComponent implements OnInit {
+  constructor(public dialog: MatDialog, public router: Router,
+    private trainingService: TrainingService,
+    private store: Store<fromApp.State>) { }
+
   progress = 0;
   timer;
   currentExercise: Exercise;
   ngOnInit() {
-    const currentExersice = this.trainingService.currentTrainingChange$$.pipe(takeUntil(this.ngUnsubscribe));
-    currentExersice.subscribe((exrsice: Exercise) => {
-      this.currentExercise = exrsice;
+    this.store.select("training").subscribe((state) => {
+      this.currentExercise = state && state.currentExersice;
     })
     this.startExercise();
   }
@@ -48,8 +49,5 @@ export class CurrentTrainingComponent implements OnInit, OnDestroy {
       }
     })
   }
-  ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
-  }
+
 }

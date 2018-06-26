@@ -37,6 +37,7 @@ export class TrainingService {
         })
     }
     startExercise(id: string) {
+        this.store.dispatch(new TRAINING.SetCurrentExersice(id));
         this.currentExercise = this.availableExercise.find(exercise => exercise.id === id);
         this.currentTrainingChange$$.next({ ...this.currentExercise });
     }
@@ -44,6 +45,7 @@ export class TrainingService {
         this.saveDataToDb({ ...this.currentExercise, date: new Date(), state: "completed" })
         this.currentExercise = null;
         this.currentTrainingChange$$.next(null);
+        this.store.dispatch(new TRAINING.StopCurrentExersice());
     }
     cancelExercise(progress: number) {
         this.saveDataToDb({
@@ -55,6 +57,7 @@ export class TrainingService {
         })
         this.currentExercise = null;
         this.currentTrainingChange$$.next(null);
+        this.store.dispatch(new TRAINING.StopCurrentExersice());
     }
     getPastExercise() {
         this.db.collection("finishExersices").valueChanges().subscribe((res: Exercise[]) => {
